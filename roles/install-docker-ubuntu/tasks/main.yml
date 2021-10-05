@@ -1,0 +1,27 @@
+---
+# tasks file for install-docker-ubuntu
+- name: Install pre-requisites for Docker
+  become: yes
+  apt:
+    name:
+      - python3
+      - python3-pip
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install docker.io
+  become: yes
+  apt:
+    name: docker.io
+    state: latest
+    update_cache: yes
+  register: docker
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install docker.py
+  become: yes
+  pip:
+    name: docker.py
+    state: latest
+  when: docker.changed and ansible_distribution == "Ubuntu"
+

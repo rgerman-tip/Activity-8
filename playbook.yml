@@ -1,0 +1,15 @@
+---
+- name: Tasks for CentOS
+  hosts: centos
+  roles:
+    - install-docker-centos
+    - docker-group
+    - web-and-db-server-centos 
+    
+- name: Tasks for Ubuntu
+  hosts: ubuntu
+  roles:
+    - install-docker-ubuntu
+    - docker-group
+    - web-and-db-server-ubuntu
+
